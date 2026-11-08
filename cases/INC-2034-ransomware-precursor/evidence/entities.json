@@ -1,0 +1,38 @@
+[
+  {
+    "entity": "FIN-WS-410",
+    "type": "host",
+    "role": "workstation",
+    "os": "Windows 11 23H2",
+    "owner": "s.lee",
+    "ip": "10.10.50.210",
+    "criticality": "High",
+    "site": "NYC-4F"
+  },
+  {
+    "entity": "203.0.113.55",
+    "type": "ip",
+    "reputation": "malicious",
+    "score": 98,
+    "intel_type": "C2 server",
+    "geo": "Bulgaria",
+    "asn": "AS64501 VDS Cloud",
+    "first_seen": "2026-10-09",
+    "tags": [
+      "cobalt-strike",
+      "teamserver",
+      "port-8443"
+    ]
+  },
+  {
+    "entity": "s.lee@example.net",
+    "type": "user",
+    "name": "Sun Lee",
+    "title": "Senior Accountant",
+    "department": "Accounting",
+    "mfa": "Push",
+    "vip": false,
+    "privileged": false,
+    "service_account": false
+  }
+]

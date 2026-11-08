@@ -1,0 +1,52 @@
+[
+  {
+    "alert_id": "COR-1041",
+    "title": "Credential submission to suspicious login portal",
+    "detection_rule": "DR-022 Phishing URL click + form submit",
+    "source": "Email Gateway",
+    "severity": "critical",
+    "confidence": "high",
+    "priority": "p1",
+    "affected_entities": [
+      "j.martinez@example.net",
+      "FIN-WS-117"
+    ],
+    "business_context": "User submitted credentials to non-corporate domain",
+    "mitre": [
+      "T1566.002"
+    ]
+  },
+  {
+    "alert_id": "COR-1042",
+    "title": "Suspicious PowerShell execution on FIN-WS-117",
+    "detection_rule": "DR-014 Encoded PowerShell",
+    "source": "Sysmon",
+    "severity": "high",
+    "confidence": "medium",
+    "priority": "p2",
+    "affected_entities": [
+      "FIN-WS-117",
+      "j.martinez@example.net"
+    ],
+    "business_context": "Finance analyst workstation; after-hours activity",
+    "mitre": [
+      "T1059.001"
+    ]
+  },
+  {
+    "alert_id": "COR-1040",
+    "title": "Sign-in from unfamiliar ASN (198.51.100.42)",
+    "detection_rule": "DR-003 Impossible travel / new ASN",
+    "source": "Entra ID",
+    "severity": "high",
+    "confidence": "medium",
+    "priority": "p2",
+    "affected_entities": [
+      "j.martinez@example.net"
+    ],
+    "business_context": "MFA satisfied; risk flagged medium",
+    "mitre": [
+      "T1078"
+    ]
+  }
+]

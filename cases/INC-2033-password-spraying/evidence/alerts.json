@@ -1,0 +1,35 @@
+[
+  {
+    "alert_id": "COR-1035",
+    "title": "Password spraying from 203.0.113.99 (45 attempts)",
+    "detection_rule": "DR-007 Password spray threshold",
+    "source": "Windows Security",
+    "severity": "high",
+    "confidence": "high",
+    "priority": "p1",
+    "affected_entities": [
+      "203.0.113.99",
+      "p.nguyen@example.net"
+    ],
+    "business_context": "Multiple accounts targeted; 3 successes",
+    "mitre": [
+      "T1110.003"
+    ]
+  },
+  {
+    "alert_id": "COR-1034",
+    "title": "Account locked: p.nguyen@example.net",
+    "detection_rule": "DR-009 Lockout threshold",
+    "source": "Windows Security",
+    "severity": "medium",
+    "confidence": "high",
+    "priority": "p3",
+    "affected_entities": [
+      "p.nguyen@example.net"
+    ],
+    "business_context": "CS rep without MFA",
+    "mitre": [
+      "T1110.003"
+    ]
+  }
+]

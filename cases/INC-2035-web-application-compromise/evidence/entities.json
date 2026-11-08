@@ -1,0 +1,42 @@
+[
+  {
+    "entity": "FIN-SRV-WEB01",
+    "type": "host",
+    "role": "server",
+    "os": "Windows Server 2019 / IIS 10",
+    "owner": "Digital",
+    "ip": "172.16.10.21",
+    "criticality": "High",
+    "site": "DMZ"
+  },
+  {
+    "entity": "203.0.113.55",
+    "type": "ip",
+    "reputation": "malicious",
+    "score": 98,
+    "intel_type": "C2 server",
+    "geo": "Bulgaria",
+    "asn": "AS64501 VDS Cloud",
+    "first_seen": "2026-10-09",
+    "tags": [
+      "cobalt-strike",
+      "teamserver",
+      "port-8443"
+    ]
+  },
+  {
+    "entity": "203.0.113.99",
+    "type": "ip",
+    "reputation": "malicious",
+    "score": 95,
+    "intel_type": "Bulletproof VPS",
+    "geo": "Moldova",
+    "asn": "AS64500 Stark Hosting",
+    "first_seen": "2026-09-02",
+    "tags": [
+      "password-spray",
+      "sqli-scanner",
+      "ssh-bruteforce"
+    ]
+  }
+]

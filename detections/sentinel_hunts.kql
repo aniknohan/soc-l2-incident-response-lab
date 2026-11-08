@@ -1,0 +1,65 @@
+// SentriCore SOC L2 lab: Microsoft Sentinel / Defender hunts (KQL).
+
+// 1. Password spray: one source IP failing Kerberos pre-auth for many accounts (INC-2033)
+SecurityEvent
+| where EventID == 4771 and Status == "0x18"
+| summarize Accounts = dcount(TargetUserName), Attempts = count(), Users = make_set(TargetUserName, 50) by IpAddress, bin(TimeGenerated, 30m)
+| where Accounts > 10
+| order by Accounts desc
+
+// 2. Spray success check: accounts that logged on from a spraying IP
+let sprayers = SecurityEvent
+    | where EventID == 4771 and Status == "0x18"
+    | summarize n = dcount(TargetUserName) by IpAddress
+    | where n > 10
+    | project IpAddress;
+SecurityEvent
+| where EventID == 4624 and IpAddress in (sprayers)
+| summarize FirstSuccess = min(TimeGenerated) by TargetUserName, IpAddress
+
+// 3. Kerberoasting: RC4 service tickets in bulk from one client (T1558.003)
+SecurityEvent
+| where EventID == 4769 and TicketEncryptionType == "0x17" and Status == "0x0"
+| where ServiceName !endswith "$" and ServiceName != "krbtgt"
+| summarize Services = dcount(ServiceName), Requests = count() by IpAddress, bin(TimeGenerated, 5m)
+| where Services >= 5 or Requests >= 10
+
+// 4. Recovery inhibition before ransomware (INC-2034)
+DeviceProcessEvents
+| where (FileName =~ "vssadmin.exe" and ProcessCommandLine has_all ("delete", "shadows"))
+     or (FileName =~ "wbadmin.exe" and ProcessCommandLine has "delete")
+| project Timestamp, DeviceName, AccountName, InitiatingProcessFileName, ProcessCommandLine
+
+// 5. Beaconing: regular connection intervals to one public IP
+DeviceNetworkEvents
+| where RemoteIPType == "Public"
+| sort by DeviceName asc, RemoteIP asc, Timestamp asc
+| extend Delta = datetime_diff("second", Timestamp, prev(Timestamp)), Same = DeviceName == prev(DeviceName) and RemoteIP == prev(RemoteIP)
+| where Same
+| summarize Connections = count(), AvgInterval = avg(Delta), Jitter = stdev(Delta) by DeviceName, RemoteIP, RemotePort
+| where Connections >= 10 and Jitter < AvgInterval * 0.2
+
+// 6. Web shell: IIS worker spawning shells or schedulers (INC-2035)
+DeviceProcessEvents
+| where InitiatingProcessFileName =~ "w3wp.exe"
+| where FileName in~ ("cmd.exe", "powershell.exe", "pwsh.exe", "schtasks.exe", "whoami.exe")
+| project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine
+
+// 7. BEC: inbox rules that hide or forward mail (INC-2032)
+OfficeActivity
+| where Operation in ("New-InboxRule", "Set-InboxRule")
+| where Parameters has_any ("MoveToFolder", "ForwardTo", "ForwardAsAttachmentTo", "RedirectTo", "DeleteMessage")
+| project TimeGenerated, UserId, ClientIP, Parameters
+
+// 8. Office macro dropper: Office spawning encoded PowerShell (COR-1029)
+DeviceProcessEvents
+| where InitiatingProcessFileName in~ ("winword.exe", "excel.exe", "outlook.exe")
+| where FileName in~ ("powershell.exe", "pwsh.exe")
+| where ProcessCommandLine has_any (" -enc", "EncodedCommand", " -e ")
+| project Timestamp, DeviceName, AccountName, InitiatingProcessFileName, ProcessCommandLine
+
+// 9. MFA fatigue: many denied pushes followed by an approval
+SigninLogs
+| where TimeGenerated > ago(1d)
+| summarize Denied = countif(ResultType == "500121"), Success = countif(ResultType == "0"), IPs = make_set(IPAddress) by UserPrincipalName, bin(TimeGenerated, 30m)
+| where Denied >= 3 and Success >= 1

@@ -1,0 +1,5 @@
+From: R. Castillo (SOC L1, day shift)
+To: SOC-L2-Incident-Response
+Incident: INC-2031
+
+User j.martinez entered credentials on hxxps://login-portal-example.net/verify at 17:10 (phish from it-helpdesk@example.net, SPF softfail). Sign-in from 198.51.100.42 at 17:15 (MFA push approved), then encoded PowerShell on FIN-WS-117 at 17:25. IOCs: login-portal-example.net, 198.51.100.42. Nothing contained yet. Need L2 to scope credential use and contain.

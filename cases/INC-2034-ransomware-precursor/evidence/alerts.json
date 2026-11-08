@@ -1,0 +1,36 @@
+[
+  {
+    "alert_id": "COR-1025",
+    "title": "Ransomware precursor: vssadmin delete shadows",
+    "detection_rule": "DR-001 Ransomware precursor TTPs",
+    "source": "Sysmon",
+    "severity": "critical",
+    "confidence": "high",
+    "priority": "p1",
+    "affected_entities": [
+      "FIN-WS-410",
+      "s.lee@example.net"
+    ],
+    "business_context": "Accounting; shadow copy deletion",
+    "mitre": [
+      "T1490"
+    ]
+  },
+  {
+    "alert_id": "COR-1024",
+    "title": "C2 beacon to 203.0.113.55:8443 (60s interval)",
+    "detection_rule": "DR-019 Beaconing detection",
+    "source": "Sysmon",
+    "severity": "high",
+    "confidence": "medium",
+    "priority": "p2",
+    "affected_entities": [
+      "FIN-WS-410",
+      "203.0.113.55"
+    ],
+    "business_context": "Possible Cobalt Strike",
+    "mitre": [
+      "T1571"
+    ]
+  }
+]

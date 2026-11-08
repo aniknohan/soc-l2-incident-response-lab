@@ -1,0 +1,38 @@
+title: 'Office Application Spawns Encoded PowerShell'
+id: a6b543b2-ff9d-534d-b97f-e682ea9a93d4
+status: experimental
+description: 'Detects Word, Excel or Outlook launching PowerShell with an encoded command, the macro dropper pattern in COR-1029.'
+references:
+  - https://attack.mitre.org/
+author: Anik Nohan
+date: 2026-11-08
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+  selection_child:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+  selection_enc:
+    CommandLine|contains:
+      - ' -enc'
+      - ' -EncodedCommand'
+      - ' -e '
+  condition: all of selection_*
+fields:
+  - CommandLine
+  - ParentImage
+  - User
+falsepositives:
+  - Very rare; signed internal add-ins (verify publisher)
+level: high
+tags:
+  - attack.execution
+  - attack.t1204.002
+  - attack.t1059.001

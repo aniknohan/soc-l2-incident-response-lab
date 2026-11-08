@@ -1,0 +1,5 @@
+From: R. Castillo (SOC L1, day shift)
+To: SOC-L2-Incident-Response
+Incident: INC-2035
+
+WAF let one UNION SELECT through from 203.0.113.99 at 16:45 (HTTP 200) on FIN-SRV-WEB01. At 16:50 w3wp.exe connected to 203.0.113.55:8443 and at 16:52 created a scheduled task 'Update'. Likely web shell. Public customer portal, PII risk.

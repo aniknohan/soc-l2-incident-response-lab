@@ -1,0 +1,31 @@
+title: 'Kerberoasting via RC4 Service Ticket Requests'
+id: 225ceade-2fdc-5ed1-85d2-a401f70fb40d
+status: experimental
+description: 'Detects TGS requests using RC4 (0x17) encryption for user service accounts. A burst from one host indicates Kerberoasting.'
+references:
+  - https://attack.mitre.org/
+author: Anik Nohan
+date: 2026-11-08
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4769
+    TicketEncryptionType: '0x17'
+    Status: '0x0'
+  filter_machine:
+    ServiceName|endswith: '$'
+  filter_krbtgt:
+    ServiceName: 'krbtgt'
+  condition: selection and not 1 of filter_*
+fields:
+  - IpAddress
+  - ServiceName
+  - TargetUserName
+falsepositives:
+  - Legacy applications that only support RC4
+level: high
+tags:
+  - attack.credential-access
+  - attack.t1558.003

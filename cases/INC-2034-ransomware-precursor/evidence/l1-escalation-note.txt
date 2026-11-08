@@ -1,0 +1,5 @@
+From: R. Castillo (SOC L1, day shift)
+To: SOC-L2-Incident-Response
+Incident: INC-2034
+
+FIN-WS-410 (s.lee, Accounting): vssadmin delete shadows /all /quiet at 18:25, wbadmin delete backup at 18:26, whoami /priv at 18:27, 60s beacon to 203.0.113.55:8443 from 18:30. Ransomware precursor, no encryption seen yet. Host NOT isolated (needs L2). Requesting immediate isolation.

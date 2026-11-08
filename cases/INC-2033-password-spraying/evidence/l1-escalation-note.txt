@@ -1,0 +1,5 @@
+From: R. Castillo (SOC L1, day shift)
+To: SOC-L2-Incident-Response
+Incident: INC-2033
+
+Account lockout for p.nguyen, lots of 4771 from 203.0.113.99. Probably spray. Escalating.

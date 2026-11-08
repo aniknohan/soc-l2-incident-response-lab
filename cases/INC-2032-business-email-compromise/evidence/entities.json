@@ -1,0 +1,40 @@
+[
+  {
+    "entity": "k.larsen@example.net",
+    "type": "user",
+    "name": "Karin Larsen",
+    "title": "Treasury Director",
+    "department": "Treasury",
+    "mfa": "Push",
+    "vip": true,
+    "privileged": false,
+    "service_account": false
+  },
+  {
+    "entity": "192.0.2.88",
+    "type": "ip",
+    "reputation": "suspicious",
+    "score": 74,
+    "intel_type": "Hosting provider",
+    "geo": "Nigeria",
+    "asn": "AS64504 CloudNG",
+    "first_seen": "2026-10-16",
+    "tags": [
+      "session-token-replay"
+    ]
+  },
+  {
+    "entity": "vendorlogistics-example.net",
+    "type": "domain",
+    "reputation": "malicious",
+    "score": 90,
+    "intel_type": "Look-alike vendor domain",
+    "geo": "—",
+    "asn": "Registered 2026-10-12",
+    "first_seen": "2026-10-13",
+    "tags": [
+      "bec",
+      "typosquat"
+    ]
+  }
+]

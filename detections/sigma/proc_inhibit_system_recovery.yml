@@ -1,0 +1,31 @@
+title: 'Shadow Copy or Backup Deletion'
+id: 1ffbb747-9150-5ff1-808f-4e828b0f2d2a
+status: experimental
+description: 'Detects vssadmin and wbadmin commands that delete shadow copies or backups, a common ransomware pre-encryption step seen in INC-2034.'
+references:
+  - https://attack.mitre.org/
+author: Anik Nohan
+date: 2026-11-08
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_vss:
+    Image|endswith: '\vssadmin.exe'
+    CommandLine|contains|all:
+      - 'delete'
+      - 'shadows'
+  selection_wb:
+    Image|endswith: '\wbadmin.exe'
+    CommandLine|contains: 'delete'
+  condition: 1 of selection_*
+fields:
+  - User
+  - CommandLine
+  - ParentImage
+falsepositives:
+  - Backup software maintenance (verify the parent process and change ticket)
+level: critical
+tags:
+  - attack.impact
+  - attack.t1490

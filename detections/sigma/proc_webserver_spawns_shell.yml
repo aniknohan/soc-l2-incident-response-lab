@@ -1,0 +1,31 @@
+title: 'IIS Worker Process Spawns Shell or Scheduler'
+id: 7e0a642f-9700-5398-af34-7fb5f5ce5cca
+status: experimental
+description: 'Detects w3wp.exe launching cmd, PowerShell or schtasks, a strong web shell indicator seen in INC-2035.'
+references:
+  - https://attack.mitre.org/
+author: Anik Nohan
+date: 2026-11-08
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    ParentImage|endswith: '\w3wp.exe'
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\schtasks.exe'
+      - '\whoami.exe'
+  condition: selection
+fields:
+  - CommandLine
+  - User
+falsepositives:
+  - Rare legitimate application health checks (baseline per site)
+level: high
+tags:
+  - attack.persistence
+  - attack.t1505.003
+  - attack.t1053.005

@@ -1,0 +1,37 @@
+[
+  {
+    "alert_id": "COR-1013",
+    "title": "Successful SQL injection on FIN-SRV-WEB01",
+    "detection_rule": "DR-028 SQLi pattern + 200 response",
+    "source": "WAF",
+    "severity": "critical",
+    "confidence": "high",
+    "priority": "p1",
+    "affected_entities": [
+      "FIN-SRV-WEB01",
+      "203.0.113.99"
+    ],
+    "business_context": "Public customer portal",
+    "mitre": [
+      "T1190"
+    ]
+  },
+  {
+    "alert_id": "COR-1012",
+    "title": "Web server outbound C2 + scheduled task creation",
+    "detection_rule": "DR-016 Web server child process",
+    "source": "Sysmon",
+    "severity": "critical",
+    "confidence": "high",
+    "priority": "p1",
+    "affected_entities": [
+      "FIN-SRV-WEB01",
+      "203.0.113.55"
+    ],
+    "business_context": "Possible web shell",
+    "mitre": [
+      "T1505.003",
+      "T1053.005"
+    ]
+  }
+]

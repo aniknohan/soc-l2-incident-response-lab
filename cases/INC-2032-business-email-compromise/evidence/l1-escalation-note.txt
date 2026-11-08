@@ -1,0 +1,5 @@
+From: R. Castillo (SOC L1, day shift)
+To: SOC-L2-Incident-Response
+Incident: INC-2032
+
+Weird email stuff on k.larsen mailbox, rule + email to vendor. Pls check.

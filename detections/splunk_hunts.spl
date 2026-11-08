@@ -1,0 +1,52 @@
+`comment("SentriCore SOC L2 lab: Splunk hunts. Index and field names follow docs/environment.md.")`
+
+`comment("1. Password spray: one source IP failing Kerberos pre-auth for many accounts (INC-2033)")`
+index=wineventlog EventCode=4771 Status=0x18
+| bin _time span=30m
+| stats dc(TargetUserName) as accounts count as attempts values(TargetUserName) as users by IpAddress _time
+| where accounts > 10
+| sort - accounts
+
+`comment("2. Spray success check: which targeted accounts then logged on from the same IP")`
+index=wineventlog EventCode=4624 [ search index=wineventlog EventCode=4771 Status=0x18 | stats dc(TargetUserName) as n by IpAddress | where n > 10 | fields IpAddress ]
+| stats earliest(_time) as first_success by TargetUserName IpAddress
+| convert ctime(first_success)
+
+`comment("3. Kerberoasting: RC4 service tickets in bulk from one client (T1558.003)")`
+index=wineventlog EventCode=4769 TicketEncryptionType=0x17 Status=0x0 NOT ServiceName="*$" NOT ServiceName=krbtgt
+| bin _time span=5m
+| stats dc(ServiceName) as services count by IpAddress _time
+| where services >= 5 OR count >= 10
+
+`comment("4. Recovery inhibition before ransomware (INC-2034)")`
+index=sysmon EventCode=1 (Image="*\\vssadmin.exe" CommandLine="*delete*shadows*") OR (Image="*\\wbadmin.exe" CommandLine="*delete*")
+| table _time host User ParentImage CommandLine
+
+`comment("5. Beaconing: regular connection intervals to one external IP")`
+index=sysmon EventCode=3 NOT (DestinationIp=10.* OR DestinationIp=172.16.* OR DestinationIp=192.168.*)
+| sort 0 host DestinationIp _time
+| streamstats current=f last(_time) as prev by host DestinationIp
+| eval delta=_time-prev
+| stats count avg(delta) as avg_interval stdev(delta) as jitter by host DestinationIp DestinationPort
+| where count >= 10 AND jitter < (avg_interval * 0.2)
+
+`comment("6. Web shell: IIS worker spawning shells or schedulers (INC-2035)")`
+index=sysmon EventCode=1 ParentImage="*\\w3wp.exe" (Image="*\\cmd.exe" OR Image="*\\powershell.exe" OR Image="*\\schtasks.exe" OR Image="*\\whoami.exe")
+| table _time host User Image CommandLine
+
+`comment("7. Successful injection: WAF allowed a request that matched an injection signature")`
+index=network sourcetype=waf action=allow (signature="*SQL*" OR uri_query="*UNION*SELECT*")
+| table _time src_ip dest uri_path status
+
+`comment("8. BEC: inbox rules that hide or forward mail (INC-2032)")`
+index=o365 Operation IN ("New-InboxRule","Set-InboxRule") (Parameters="*MoveToFolder*" OR Parameters="*ForwardTo*" OR Parameters="*RedirectTo*" OR Parameters="*DeleteMessage*")
+| table _time UserId ClientIP Parameters
+
+`comment("9. Office macro dropper: Office spawning encoded PowerShell (COR-1029)")`
+index=sysmon EventCode=1 (ParentImage="*\\winword.exe" OR ParentImage="*\\excel.exe" OR ParentImage="*\\outlook.exe") Image="*\\powershell.exe" (CommandLine="* -enc*" OR CommandLine="*EncodedCommand*")
+| table _time host User ParentImage CommandLine
+
+`comment("10. Service account used off its host (COR-1022)")`
+index=wineventlog EventCode=4624 LogonType=3 TargetUserName=svc_backup NOT IpAddress=10.10.1.50
+| stats count earliest(_time) as first by IpAddress WorkstationName Computer
+| convert ctime(first)

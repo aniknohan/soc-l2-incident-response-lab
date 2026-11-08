@@ -1,0 +1,36 @@
+title: 'Inbox Rule That Hides or Forwards Mail'
+id: 2f55615f-3372-57e6-9453-670d9bbbdaa0
+status: experimental
+description: 'Detects new or changed Exchange Online inbox rules that move mail to Archive, RSS or Deleted Items, or forward it externally, the BEC pattern in INC-2032.'
+references:
+  - https://attack.mitre.org/
+author: Anik Nohan
+date: 2026-11-08
+logsource:
+  product: m365
+  service: exchange
+detection:
+  selection_op:
+    Operation:
+      - 'New-InboxRule'
+      - 'Set-InboxRule'
+  selection_action:
+    Parameters|contains:
+      - 'MoveToFolder'
+      - 'ForwardTo'
+      - 'ForwardAsAttachmentTo'
+      - 'RedirectTo'
+      - 'DeleteMessage'
+  condition: all of selection_*
+fields:
+  - UserId
+  - ClientIP
+  - Parameters
+falsepositives:
+  - Users organising their own mail (review rule name and target folder)
+level: high
+tags:
+  - attack.persistence
+  - attack.t1098.002
+  - attack.collection
+  - attack.t1114.003

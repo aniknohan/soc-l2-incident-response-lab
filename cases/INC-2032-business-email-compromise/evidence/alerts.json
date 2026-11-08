@@ -1,0 +1,34 @@
+[
+  {
+    "alert_id": "COR-1038",
+    "title": "New inbox rule forwarding to external domain",
+    "detection_rule": "DR-031 Suspicious inbox rule",
+    "source": "Entra ID",
+    "severity": "high",
+    "confidence": "high",
+    "priority": "p2",
+    "affected_entities": [
+      "k.larsen@example.net"
+    ],
+    "business_context": "Treasury Director mailbox",
+    "mitre": [
+      "T1098.002"
+    ]
+  },
+  {
+    "alert_id": "COR-1037",
+    "title": "Outbound email with updated wire instructions to vendor",
+    "detection_rule": "DR-040 BEC wire-instruction pattern",
+    "source": "Email Gateway",
+    "severity": "critical",
+    "confidence": "medium",
+    "priority": "p1",
+    "affected_entities": [
+      "k.larsen@example.net"
+    ],
+    "business_context": "Potential fraudulent wire $480k",
+    "mitre": [
+      "T1566"
+    ]
+  }
+]

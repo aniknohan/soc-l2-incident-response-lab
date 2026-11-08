@@ -1,0 +1,55 @@
+[
+  {
+    "entity": "FIN-WS-117",
+    "type": "host",
+    "role": "workstation",
+    "os": "Windows 11 23H2",
+    "owner": "j.martinez",
+    "ip": "10.10.50.117",
+    "criticality": "Medium",
+    "site": "NYC-3F"
+  },
+  {
+    "entity": "j.martinez@example.net",
+    "type": "user",
+    "name": "Jordan Martinez",
+    "title": "Financial Analyst",
+    "department": "Finance",
+    "mfa": "Push",
+    "vip": false,
+    "privileged": false,
+    "service_account": false
+  },
+  {
+    "entity": "198.51.100.42",
+    "type": "ip",
+    "reputation": "malicious",
+    "score": 82,
+    "intel_type": "Residential proxy",
+    "geo": "Netherlands",
+    "asn": "AS64512 Hostline BV",
+    "first_seen": "2026-10-14",
+    "tags": [
+      "phishing-infra",
+      "credential-use"
+    ]
+  },
+  {
+    "entity": "login-portal-example.net",
+    "type": "domain",
+    "reputation": "malicious",
+    "score": 97,
+    "intel_type": "Credential phishing kit",
+    "geo": "—",
+    "asn": "Registered 2026-10-14 (3 days old)",
+    "first_seen": "2026-10-15",
+    "tags": [
+      "phishing",
+      "o365-lure"
+    ]
+  },
+  {
+    "entity": "svc_backup",
+    "type": "user"
+  }
+]

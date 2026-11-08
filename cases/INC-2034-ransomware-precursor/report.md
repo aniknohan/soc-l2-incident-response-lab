@@ -1,0 +1,79 @@
+# INC-2034: Incident Report
+
+> **Status:** Draft. Written by the investigating L2 analyst after working this case in the SentriCore simulator.
+> Replace every _italic prompt_ with your own findings. Delete this note when done.
+
+| Field | Value |
+|---|---|
+| Incident | INC-2034 |
+| Client | Northbridge Financial Services (fictional) |
+| Severity / Priority | critical / P1 |
+| Linked alerts | COR-1025, COR-1024 |
+| Analyst | Anik Nohan, SOC L2 (lab) |
+| Disposition | _Resolved at L2 / Escalated to Tier 3_ |
+
+## 1. Executive summary
+
+_Three to five plain-language sentences for Northbridge management: what happened, business impact, current status. No event IDs or tool names._
+
+## 2. L1 handoff review
+
+| Rating | Feedback to L1 |
+|---|---|
+| _Meets standard / Needs improvement_ | _What the note did well, or what was missing (times, IOCs, scope, ask)._ |
+
+## 3. Scoping findings
+
+| Question | Finding | Evidence (query / log line) |
+|---|---|---|
+| Which two commands show the attacker inhibiting recovery? | _ | _ |
+| What destination port does the C2 beacon use? | _ | _ |
+| Which other host has talked to the same C2 server? | _ | _ |
+| Are there other affected users or hosts? | _ | _ |
+
+## 4. Timeline (UTC, 2026-10-17)
+
+| Time | Event | Source |
+|---|---|---|
+| _HH:MM_ | _Initial access_ | _ |
+| _HH:MM_ | _…_ | _ |
+| _HH:MM_ | _Containment complete_ | _ |
+
+## 5. Scope and impact
+
+_Every affected user, host and data set; what the attacker reached; what they did not reach._
+
+## 6. Root cause
+
+**Category:** _e.g. Phishing / credential theft_
+
+_How the attacker got in and why it worked (control gap)._
+
+## 7. Containment and actions taken
+
+| Time | Action | Target | Approved by |
+|---|---|---|---|
+| _HH:MM_ | _Isolate host / revoke sessions / reset password / block_ | _ | _ |
+
+## 8. Indicators of compromise
+
+| Type | Indicator (defanged) | Context |
+|---|---|---|
+| _ip / domain / url / hash_ | _ | _ |
+
+## 9. MITRE ATT&CK mapping
+
+| Tactic | Technique | Observed as |
+|---|---|---|
+| Impact | T1490 Inhibit System Recovery | _ |
+| Command and Control | T1571 Non-Standard Port | _ |
+
+## 10. Recommendations
+
+1. _Eradication step_
+2. _Recovery step_
+3. _Prevention or detection improvement (link to a rule in `detections/` if you wrote one)_
+
+## 11. Disposition and justification
+
+_Resolve at L2 or escalate to Tier 3, and why._

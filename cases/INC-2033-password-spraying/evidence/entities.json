@@ -1,0 +1,50 @@
+[
+  {
+    "entity": "203.0.113.99",
+    "type": "ip",
+    "reputation": "malicious",
+    "score": 95,
+    "intel_type": "Bulletproof VPS",
+    "geo": "Moldova",
+    "asn": "AS64500 Stark Hosting",
+    "first_seen": "2026-09-02",
+    "tags": [
+      "password-spray",
+      "sqli-scanner",
+      "ssh-bruteforce"
+    ]
+  },
+  {
+    "entity": "p.nguyen@example.net",
+    "type": "user",
+    "name": "Phuong Nguyen",
+    "title": "Customer Service Rep",
+    "department": "Customer Service",
+    "mfa": "None",
+    "vip": false,
+    "privileged": false,
+    "service_account": false
+  },
+  {
+    "entity": "b.garcia@example.net",
+    "type": "user",
+    "name": "Bea Garcia",
+    "title": "Compliance Officer",
+    "department": "Compliance",
+    "mfa": "None",
+    "vip": false,
+    "privileged": false,
+    "service_account": false
+  },
+  {
+    "entity": "c.dubois@example.net",
+    "type": "user",
+    "name": "Camille Dubois",
+    "title": "Sales Representative",
+    "department": "Sales",
+    "mfa": "Push",
+    "vip": false,
+    "privileged": false,
+    "service_account": false
+  }
+]

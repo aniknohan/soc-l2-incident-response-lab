@@ -1,0 +1,9 @@
+event_time,source,category,event_type,host,user,src_ip,dst_ip,process,command_line,severity,raw
+"2026-10-17T12:17:00.000Z","Windows Security","windows_security","4624","FIN-WS-204","k.larsen@example.net","10.10.50.204","10.10.50.204","","","info","EventID=4624 User=k.larsen@example.net LogonType=2 Workstation=FIN-WS-204 Time=2026-10-17T12:17:00.000Z"
+"2026-10-17T13:15:00.000Z","VPN","vpn","vpn_connect","","k.larsen@example.net","192.0.2.13","10.10.0.4","","","info","VPN connect user=k.larsen@example.net duration=142m"
+"2026-10-17T13:57:00.000Z","VPN","vpn","vpn_connect","","k.larsen@example.net","192.0.2.46","10.10.0.4","","","info","VPN connect user=k.larsen@example.net duration=132m"
+"2026-10-17T13:58:00.000Z","Email Gateway","email","email_received","","k.larsen@example.net","","","","","info","Email from noreply@vendor[.]example.net spf=pass dkim=pass"
+"2026-10-17T16:20:00.000Z","Entra ID","cloud_signin","SigninLogs","","k.larsen@example.net","192.0.2.88","","","","medium","EntraID session-token reuse user=k.larsen@example.net ip=192.0.2.88"
+"2026-10-17T16:22:00.000Z","Entra ID","cloud_audit","AuditLog","","k.larsen@example.net","","","","","high","New-InboxRule name='...' MoveToFolder=Archive by k.larsen@example.net"
+"2026-10-17T16:26:00.000Z","Email Gateway","email","email_sent","","k.larsen@example.net","","","","","high","Outbound email from k.larsen to ap@vendorlogistics-example.net subject='Updated Wire Instructions'"
+"2026-10-17T17:19:00.000Z","Windows Security","windows_security","4624","FIN-WS-204","k.larsen@example.net","10.10.50.204","10.10.50.204","","","info","EventID=4624 User=k.larsen@example.net LogonType=2 Workstation=FIN-WS-204 Time=2026-10-17T17:19:00.000Z"
