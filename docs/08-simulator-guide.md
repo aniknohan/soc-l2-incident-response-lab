@@ -1,4 +1,4 @@
-# SentriCore SOC Simulator
+# 08 — Simulator Guide
 
 A single-page SOC console I use as the lab environment: [`simulator/index.html`](../simulator/index.html). Open it in any browser or through GitHub Pages; progress is saved in the browser.
 

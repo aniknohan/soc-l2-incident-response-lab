@@ -33,7 +33,7 @@ Use the raw events, not the alert list, to build the timeline: alerts are groupe
 
 ## Hunting queries
 
-Starting points I used to scope the incident, written for both Splunk and Microsoft Sentinel. Field names follow the lab's data model in [`docs/environment.md`](../../docs/environment.md).
+Starting points I used to scope the incident, written for both Splunk and Microsoft Sentinel. Field names follow the lab's data model in [`docs/02-lab-environment.md`](../../docs/02-lab-environment.md).
 
 ### Recovery inhibition commands
 

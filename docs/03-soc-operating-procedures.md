@@ -1,4 +1,4 @@
-# SOC Standard Operating Procedures
+# 03 — SOC Operating Procedures
 
 SentriCore SOC-SOP-001. These are the standards the simulator's QA reviews grade against.
 

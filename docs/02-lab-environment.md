@@ -1,4 +1,4 @@
-# Lab Environment
+# 02 — Lab Environment
 
 **SentriCore Security** is a fictional managed security service provider (MSSP). Its client, **Northbridge Financial Services**, is also fictional. Every IP address comes from the RFC 5737 documentation ranges (`192.0.2.0/24`, `198.51.100.0/24`, `203.0.113.0/24`) or private RFC 1918 space, and every domain uses `example.net`, `example.com` or `example.org`. No real organisation, person or infrastructure is involved.
 

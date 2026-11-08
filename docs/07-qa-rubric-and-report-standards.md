@@ -1,4 +1,4 @@
-# QA Rubric
+# 07 — QA Rubric and Report Standards
 
 The simulator grades every resolved ticket and incident against these rubrics. Each case's `README.md` records the score I achieved.
 
@@ -29,3 +29,34 @@ The simulator grades every resolved ticket and incident against these rubrics. E
 | Recommendations | 10 | At least two concrete recommendations |
 | Client notification | 10 | 120+ characters, references the incident or client, no jargon |
 | Disposition | 5 | Resolve vs escalate matches the incident |
+
+---
+
+## Report writing standard
+
+- **Lead with the conclusion.** A reader should know the verdict and impact from the first two sentences.
+- **Use UTC times and exact names:** user principal names, hostnames, IP addresses, domains.
+- **Separate facts from judgement.** What the logs show, then what I conclude from them.
+- **Defang indicators** in anything that leaves the SOC (`hxxps://`, `example[.]net`).
+- **Recommendations are actions with an owner,** not observations.
+- **Client notifications** use plain language, no event IDs or tool names, and state exactly what the client needs to do and by when.
+
+## Example handoff notes
+
+A note that meets the standard (INC-2031):
+
+```text
+User j.martinez entered credentials on hxxps://login-portal-example[.]net/verify at 17:10
+(phish from it-helpdesk@example.net, SPF softfail). Sign-in from 198.51.100.42 at 17:15
+(MFA push approved), then encoded PowerShell on FIN-WS-117 at 17:25. IOCs:
+login-portal-example[.]net, 198.51.100.42. Nothing contained yet. Need L2 to scope
+credential use and contain.
+```
+
+A note that needs improvement (INC-2032):
+
+```text
+Weird email stuff on k.larsen mailbox, rule + email to vendor. Pls check.
+```
+
+The second note has no times, no indicators, no scope and no ask. L2 has to start the investigation again from zero.
